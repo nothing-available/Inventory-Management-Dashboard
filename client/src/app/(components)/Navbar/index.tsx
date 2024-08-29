@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { useAppDispatch, useAppSelector } from "@/redux"
-import { setIsDarkMode, setIsSidebarCollapsed } from "@/state"
-import { Bell, Menu, Moon, Settings, Sun } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { useAppDispatch, useAppSelector } from "@/redux";
+import { setIsDarkMode, setIsSidebarCollapsed } from "@/state";
+import { Bell, Menu, Moon, Settings, Sun } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const NavBar = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     state => state.global.isSidebarCollapsed
-  )
-  const isDarkMode = useAppSelector(state => state.global.isDarkMode)
+  );
+  const isDarkMode = useAppSelector(state => state.global.isDarkMode);
 
   const toggleSidebar = () => {
-    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
-  }
+    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+  };
 
   const toggleDarkMode = () => {
-    dispatch(setIsDarkMode(!isDarkMode))
-  }
+    dispatch(setIsDarkMode(!isDarkMode));
+  };
 
   return (
     <div className='flex justify-between items-center w-full mb-7'>
@@ -75,17 +75,25 @@ const NavBar = () => {
             </span>
           </div>
           <hr className='w-0 h-7 border border-solid border-l border-gray-300 mx-3' />
-          <div className='flex items-center gap-3 cursor-pointer'>image</div>
-          <span className='font-semibold'>Sumit</span>
+          <div className='flex items-center gap-3 cursor-pointer'>
+            <Image
+              src='https://s3-inventorymanagementsystem.s3.ap-south-1.amazonaws.com/profile.jpg'
+              alt='Profile'
+              width={50}
+              height={50}
+              className='rounded-full h-full object-cover'
+            />
+            <span className='font-semibold'>Sumit</span>
+          </div>
         </div>
+        <Link href='/settings'>
+          <Settings
+            className='cursor-pointer text-gray-500'
+            size={24}
+          />
+        </Link>
       </div>
-      <Link href='/settings'>
-        <Settings
-          className='cursor-pointer text-gray-500'
-          size={24}
-        />
-      </Link>
     </div>
-  )
-}
-export default NavBar
+  );
+};
+export default NavBar;

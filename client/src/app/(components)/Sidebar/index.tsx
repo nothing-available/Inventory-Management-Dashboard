@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/redux"
-import { setIsSidebarCollapsed } from "@/state"
+import { useAppDispatch, useAppSelector } from "@/redux";
+import { setIsSidebarCollapsed } from "@/state";
 import {
   Archive,
   CircleDollarSign,
@@ -9,15 +9,16 @@ import {
   Menu,
   SlidersHorizontal,
   User,
-} from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 interface SidebarLinkProps {
-  href: string
-  icon: LucideIcon
-  label: string
-  isCollapsed: boolean
+  href: string;
+  icon: LucideIcon;
+  label: string;
+  isCollapsed: boolean;
 }
 
 const SidebarLink = ({
@@ -26,9 +27,9 @@ const SidebarLink = ({
   label,
   isCollapsed,
 }: SidebarLinkProps) => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const isActive =
-    pathname === href || (pathname === "/" && href === "/dashboard")
+    pathname === href || (pathname === "/" && href === "/dashboard");
 
   return (
     <Link href={href}>
@@ -50,22 +51,22 @@ const SidebarLink = ({
         </span>
       </div>
     </Link>
-  )
-}
+  );
+};
 
 const SideBar = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     state => state.global.isSidebarCollapsed
-  )
+  );
 
   const toggleSidebar = () => {
-    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
-  }
+    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+  };
 
   const sidebarClassNames = `fixed flex flex-col ${
     isSidebarCollapsed ? "w-0 md:w-16" : "w-72 md:w-64"
-  } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`
+  } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
 
   return (
     <div className={sidebarClassNames}>
@@ -74,7 +75,13 @@ const SideBar = () => {
         className={`flex gap-3 justify-between md:justify-normal items-center pt-8 ${
           isSidebarCollapsed ? "px-5" : "px-8"
         }`}>
-        <div>logo</div>
+        <Image
+          src='https://s3-inventorymanagementsystem.s3.ap-south-1.amazonaws.com/logo.png'
+          alt='imcaffienestock.logo'
+          width={27}
+          height={27}
+          className="rounded w-8"
+        />
 
         <h1
           className={`${
@@ -137,7 +144,7 @@ const SideBar = () => {
         <p className='text-center text-xs text-gray-500'>&copy; 2024 Edstock</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SideBar
+export default SideBar;
